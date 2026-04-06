@@ -1,0 +1,18 @@
+# Codehawks Platform Report
+
+Platform: {{ platform }}
+Total findings: {{ findings | length }}
+
+{% for f in findings %}
+### {{ f.title }} — Severity: {{ f.severity }}
+- Matrix score: {{ f.matrix_score | default('N/A') }} (Impact: {{ f.impact }} × Likelihood: {{ f.likelihood }})
+- Description: {{ f.description }}
+{% if f.poc %}
+#### PoC
+```
+{{ f.poc }}
+```
+{% endif %}
+{% endfor %}
+
+Note: Gas costs and QA work are not accepted for Codehawks reports.

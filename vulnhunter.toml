@@ -1,0 +1,20 @@
+# Vulnhunter Configuration File
+# Place this file at ./vulnhunter.toml or ~/.config/vulnhunter.toml
+# Environment variables with prefix VULNHUNTER__ will override these settings
+
+[vulnhunter]
+debug = false
+
+[vulnhunter.scan]
+timeout = 600
+max_retries = 5
+threads = 8
+
+[vulnhunter.report]
+format = "sarif"
+output_dir = "./reports"
+
+[vulnhunter.llm]
+api_key = "[ENCRYPTION_KEY]"
+model = "moonshotai/kimi-k2.5"
+base_url = "https://openrouter.ai/api/v1"

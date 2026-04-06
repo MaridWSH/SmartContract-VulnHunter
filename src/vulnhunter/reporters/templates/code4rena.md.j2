@@ -1,0 +1,24 @@
+# Code4rena QA Report
+
+Platform: {{ platform }}
+Total findings: {{ findings | length }}
+
+{% for f in findings %}
+### {{ f.title }} — Severity: {{ f.severity }}
+- Impact: {{ f.impact | default('N/A') }} | Likelihood: {{ f.likelihood | default('N/A') }}
+- Matrix score: {{ f.matrix_score | default('N/A') }}
+- Description: {{ f.description }}
+{% if f.poc %}
+#### PoC
+```
+{{ f.poc }}
+```
+{% endif %}
+{% endfor %}
+
+### Lows QA Notes
+{% for f in findings %}
+{% if f.severity == 'Low' %}
+- Low finding: {{ f.title }} - {{ f.description }}
+{% endif %}
+{% endfor %}

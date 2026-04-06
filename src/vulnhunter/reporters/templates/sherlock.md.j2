@@ -1,0 +1,17 @@
+# Sherlock Platform Real-time Judging Report
+
+Platform: {{ platform }}
+Total findings: {{ findings | length }}
+
+{% for f in findings %}
+### {{ f.title }} — Severity: {{ f.severity }}
+- Description: {{ f.description }}
+- Impact: {{ f.impact | default('N/A') }}
+- Matrix score: {{ f.matrix_score | default('N/A') }}
+{% if f.poc %}
+#### PoC
+```
+{{ f.poc }}
+```
+{% endif %}
+{% endfor %}

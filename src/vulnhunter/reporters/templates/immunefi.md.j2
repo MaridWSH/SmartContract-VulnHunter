@@ -1,0 +1,26 @@
+# Immunefi Platform Report
+
+Total findings: {{ findings | length }}
+
+{% for f in findings %}
+### {{ f.title }} — Severity: {{ f.severity }}
+{% if f.funds_at_risk is not none %}
+- Funds at risk: ${{"{:,.2f}".format(f.funds_at_risk)}}
+{% else %}
+- Funds at risk: N/A
+{% endif %}
+- Description: {{ f.description }}
+{% if f.poc %}
+#### PoC
+```
+{{ f.poc }}
+```
+{% endif %}
+{% endfor %}
+
+{% if global_poc %}
+## Global PoC
+```
+{{ global_poc }}
+```
+{% endif %}

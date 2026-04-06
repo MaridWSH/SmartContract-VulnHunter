@@ -1,0 +1,16 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "forge-std/Test.sol";
+import "../src/{{ contract_name }}.sol";
+
+contract PoCReentrancy is Test {
+    function setUp() public {
+        // Deployment/setup can be included by the LLN-generated exploit code.
+    }
+
+    function test_reentrancy_exploit() public {
+        // LLN should fill in exploit steps here for vulnerability: {{ vulnerability_type }}
+        // This is a template skeleton to be completed by the model.
+    }
+}
