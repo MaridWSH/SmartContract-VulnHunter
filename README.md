@@ -5,7 +5,7 @@
 
   <p>
     <img src="https://img.shields.io/badge/Python-3.11%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python Version" />
-    <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
+    <img src="https://img.shields.io/badge/License-Non--Commercial-red?style=for-the-badge" alt="License" />
     <img src="https://img.shields.io/badge/Scanners-15%2B-orange?style=for-the-badge" alt="Scanners" />
     <img src="https://img.shields.io/badge/AI-Kimi%20K2.5-purple?style=for-the-badge" alt="AI Model" />
   </p>
@@ -144,4 +144,5 @@ Catch me online to discuss Web3 security, bug bounties, and AI:
 - **X (Twitter):** [@AbdelrehmanFou2](https://x.com/AbdelrehmanFou2)
 
 ## 📄 License
-This project is licensed under the [MIT License](LICENSE).
+This project is for **Non-Commercial Use Only**.
+If you want to use it for commercial purposes, you must ask for permission first.

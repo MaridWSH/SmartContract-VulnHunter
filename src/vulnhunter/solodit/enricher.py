@@ -17,8 +17,6 @@ sys.path.insert(0, "/home/ubuntu/solodit_kb")
 
 try:
     from opencode_adapter import SoloditKB
-    from search_kb import SearchResult
-
     SOLODIT_AVAILABLE = True
 except ImportError:
     SOLODIT_AVAILABLE = False
