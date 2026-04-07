@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <rect width="1200" height="400" fill="#0d1117"/>
+  
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#161b22" stroke-width="1"/>
+    </pattern>
+    
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#58a6ff" />
+      <stop offset="100%" stop-color="#3fb950" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="1200" height="400" fill="url(#grid)"/>
+
+  <g transform="translate(150, 100)">
+    <path d="M100 20 L180 50 L180 130 C180 190 140 240 100 270 C60 240 20 190 20 130 L20 50 Z" 
+          fill="none" stroke="url(#shieldGrad)" stroke-width="4" stroke-linejoin="round"/>
+    
+    <text x="60" y="165" font-family="monospace" font-size="65" fill="#c9d1d9" font-weight="bold">&gt;_</text>
+  </g>
+
+  <g transform="translate(420, 180)">
+    <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="64" fill="#c9d1d9" font-weight="800" letter-spacing="-1.5">
+      SmartContract <tspan fill="#58a6ff">VulnHunter</tspan>
+    </text>
+    
+    <text x="5" y="50" font-family="monospace" font-size="22" fill="#8b949e" letter-spacing="1">
+      The ultimate smart contract security CLI framework
+    </text>
+    
+    <g transform="translate(5, 100)">
+      <rect x="0" y="-20" width="80" height="30" rx="15" fill="#1f6feb" fill-opacity="0.15" stroke="#1f6feb" stroke-width="1"/>
+      <text x="40" y="1" font-family="monospace" font-size="14" fill="#58a6ff" text-anchor="middle">15+ Tools</text>
+      
+      <rect x="95" y="-20" width="80" height="30" rx="15" fill="#238636" fill-opacity="0.15" stroke="#238636" stroke-width="1"/>
+      <text x="135" y="1" font-family="monospace" font-size="14" fill="#3fb950" text-anchor="middle">AI-Driven</text>
+
+      <rect x="190" y="-20" width="80" height="30" rx="15" fill="#a371f7" fill-opacity="0.15" stroke="#a371f7" stroke-width="1"/>
+      <text x="230" y="1" font-family="monospace" font-size="14" fill="#d2a8ff" text-anchor="middle">PoC Gen</text>
+    </g>
+  </g>
+</svg>

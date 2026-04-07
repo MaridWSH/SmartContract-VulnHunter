@@ -1,4 +1,5 @@
 <div align="center">
+  <img src="banner.svg" alt="SmartContract VulnHunter Banner" width="100%" />
   <h1>🛡️ SmartContract VulnHunter</h1>
   <p><strong>The ultimate smart contract security CLI framework for solo bug bounty researchers</strong></p>
 
