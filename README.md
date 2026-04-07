@@ -8,6 +8,7 @@
     <img src="https://img.shields.io/badge/License-Non--Commercial-red?style=for-the-badge" alt="License" />
     <img src="https://img.shields.io/badge/Scanners-15%2B-orange?style=for-the-badge" alt="Scanners" />
     <img src="https://img.shields.io/badge/AI-Kimi%20K2.5-purple?style=for-the-badge" alt="AI Model" />
+    <a href="https://vulnhunter.sh/docs"><img src="https://img.shields.io/badge/Docs-vulnhunter.sh%2Fdocs-00ff88?style=for-the-badge" alt="Full Docs" /></a>
   </p>
 </div>
 
@@ -97,6 +98,23 @@ pip install vulnhunter
    ```bash
    vulnhunter bounty prepare findings.json --platform code4rena --output submission.md
    ```
+
+---
+
+## 📚 Full Documentation
+
+**→ [https://vulnhunter.sh/docs](https://vulnhunter.sh/docs)**
+
+The full docs cover:
+- CLI command reference with all flags
+- Configuration & LLM provider setup
+- 10-phase Recon Engine deep-dive
+- Scanner adapter internals
+- LLM 6-pass pipeline details
+- PoC generation & fork testing
+- Platform-specific report formats
+- MCP / OpenCode integration
+- Knowledge base & methodology
 
 ---
 
