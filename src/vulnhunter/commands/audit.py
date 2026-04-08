@@ -51,7 +51,7 @@ def interactive(
     """
     console.print(
         Panel.fit(
-            "[bold blue]🎯 SmartContract VulnHunter Interactive Security Audit[/bold blue]\n"
+            "[bold blue]🎯 VulnHunter Interactive Security Audit[/bold blue]\n"
             "Complete end-to-end smart contract security audit workflow",
             border_style="blue",
         )

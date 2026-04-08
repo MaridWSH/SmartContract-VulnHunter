@@ -37,9 +37,9 @@ def _deep_merge(a: Dict[str, Any], b: Dict[str, Any]) -> Dict[str, Any]:
 
 
 class ScanConfig(BaseModel):
-    timeout: int = 60  # seconds
+    timeout: int = 600  # seconds
     max_retries: int = 3
-    threads: int = 4
+    threads: int = 8
 
 
 class ReportConfig(BaseModel):
@@ -49,7 +49,7 @@ class ReportConfig(BaseModel):
 
 class LLMConfig(BaseModel):
     api_key: str = ""
-    model: str = "gpt-4o-mini"
+    model: str = "moonshotai/kimi-k2.5"
     base_url: str = ""
 
 

@@ -57,16 +57,16 @@ class Orchestrator:
             task.started_at = datetime.utcnow()
             try:
                 timeout = getattr(self.config, "default_timeout", 60)
-                findings = await asyncio.wait_for(
-                    adapter.run(task.target), timeout=timeout
-                )
+                findings = await asyncio.wait_for(adapter.run(task.target), timeout=timeout)
                 task.completed_at = datetime.utcnow()
                 task.status = TaskStatus.COMPLETED
                 task.exit_code = 0
                 if isinstance(findings, list) and len(findings) > 0:
-                    task.result = findings[0]
-                else:
+                    task.result = findings  # Store all findings, not just the first
+                elif isinstance(findings, list):
                     task.result = None
+                else:
+                    task.result = findings
                 task.error = None
             except asyncio.TimeoutError:
                 task.completed_at = datetime.utcnow()
@@ -83,9 +83,7 @@ class Orchestrator:
                 self.store.save_task(task)
                 return task
 
-    async def run_parallel(
-        self, tasks: List[Task], adapters: Dict[str, ToolAdapter]
-    ) -> List[Task]:
+    async def run_parallel(self, tasks: List[Task], adapters: Dict[str, ToolAdapter]) -> List[Task]:
         coros = []
         for t in tasks:
             adapter = adapters.get(t.tool)

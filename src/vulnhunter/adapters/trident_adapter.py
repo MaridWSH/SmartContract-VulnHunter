@@ -7,7 +7,7 @@ import re
 from typing import List
 
 from .base import ToolAdapter
-from vulnhunter.findings import Finding
+from vulnhunter.models.finding import Finding
 
 
 class TridentAdapter(ToolAdapter):
@@ -34,9 +34,7 @@ class TridentAdapter(ToolAdapter):
             data = json.loads(stdout)
             if isinstance(data, list):
                 for item in data:
-                    if isinstance(item, dict) and (
-                        "crash" in item or " Crash" in str(item)
-                    ):
+                    if isinstance(item, dict) and ("crash" in item or " Crash" in str(item)):
                         findings.append(
                             Finding(
                                 title="Trident crash",

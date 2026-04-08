@@ -1,4 +1,4 @@
-"""Clone command for SmartContract VulnHunter."""
+"""Clone command for VulnHunter."""
 
 from __future__ import annotations
 

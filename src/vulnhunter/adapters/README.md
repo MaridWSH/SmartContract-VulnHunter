@@ -1,6 +1,6 @@
 # Security Tool Adapters
 
-This module provides async adapters for integrating external security analysis tools with the SmartContract VulnHunter vulnerability detection system.
+This module provides async adapters for integrating external security analysis tools with the VulnHunter vulnerability detection system.
 
 ## Adapters
 

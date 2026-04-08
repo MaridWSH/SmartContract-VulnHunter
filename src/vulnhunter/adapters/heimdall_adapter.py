@@ -7,7 +7,7 @@ import shutil
 from typing import List
 
 from .base import ToolAdapter
-from vulnhunter.findings import Finding
+from vulnhunter.models.finding import Finding
 
 
 class HeimdallAdapter(ToolAdapter):
@@ -58,8 +58,7 @@ class HeimdallAdapter(ToolAdapter):
             findings.append(
                 Finding(
                     title=f"Heimdall decompile failed for target {target}",
-                    description=stderr.strip()
-                    or "Unknown error during Heimdall decompile",
+                    description=stderr.strip() or "Unknown error during Heimdall decompile",
                     severity="High",
                     location=target,
                     source=self.name,
@@ -101,11 +100,7 @@ class HeimdallAdapter(ToolAdapter):
                                         or item.get("note")
                                         or "Decompiled item from Heimdall"
                                     )
-                                    sev = (
-                                        item.get("severity")
-                                        or item.get("level")
-                                        or "Info"
-                                    )
+                                    sev = item.get("severity") or item.get("level") or "Info"
                                     loc = item.get("location") or target
                                     findings.append(
                                         Finding(

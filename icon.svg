@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 290" width="200" height="290">
+  <rect width="200" height="290" fill="#070a0f" rx="32"/>
+  
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&amp;display=swap');
+    </style>
+    
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00c0ff" />
+      <stop offset="100%" stop-color="#00ff88" />
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(0, 10)">
+    <path d="M100 20 L180 50 L180 130 C180 190 140 240 100 270 C60 240 20 190 20 130 L20 50 Z" 
+          fill="none" stroke="url(#shieldGrad)" stroke-width="6" stroke-linejoin="round"/>
+    <text x="100" y="165" font-family="'JetBrains Mono', monospace" font-size="65" fill="#00ff88" font-weight="bold" text-anchor="middle">&gt;_</text>
+  </g>
+</svg>

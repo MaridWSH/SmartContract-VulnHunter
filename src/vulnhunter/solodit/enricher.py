@@ -1,4 +1,4 @@
-"""Solodit Knowledge Base integration for SmartContract VulnHunter.
+"""Solodit Knowledge Base integration for VulnHunter.
 
 This module provides enrichment capabilities for scan findings
 using the Solodit vulnerability database with 62K+ real-world findings.
@@ -17,6 +17,8 @@ sys.path.insert(0, "/home/ubuntu/solodit_kb")
 
 try:
     from opencode_adapter import SoloditKB
+    from search_kb import SearchResult
+
     SOLODIT_AVAILABLE = True
 except ImportError:
     SOLODIT_AVAILABLE = False
@@ -34,7 +36,7 @@ class EnrichedFinding:
 
 
 class SoloditEnricher:
-    """Enrich SmartContract VulnHunter findings with Solodit KB data."""
+    """Enrich VulnHunter findings with Solodit KB data."""
 
     def __init__(self):
         if not SOLODIT_AVAILABLE:

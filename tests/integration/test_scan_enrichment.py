@@ -1,4 +1,4 @@
-"""Integration tests for SmartContract VulnHunter scan command with Solodit enrichment."""
+"""Integration tests for VulnHunter scan command with Solodit enrichment."""
 
 import pytest
 import asyncio

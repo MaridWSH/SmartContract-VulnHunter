@@ -1,4 +1,4 @@
-"""Solhint adapter for SmartContract VulnHunter - linting for Solidity with JSON output."""
+"""Solhint adapter for VulnHunter - linting for Solidity with JSON output."""
 
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ except Exception:
 
 
 class SolhintAdapter(ToolAdapter):
-    """Solhint adapter producing JSON output and translating to SmartContract VulnHunter Findings."""
+    """Solhint adapter producing JSON output and translating to VulnHunter Findings."""
 
     @property
     def name(self) -> str:

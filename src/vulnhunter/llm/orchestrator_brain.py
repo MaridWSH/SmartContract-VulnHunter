@@ -308,7 +308,7 @@ class OrchestratorBrain:
             languages,
         )
 
-        return f"""You are SmartContract VulnHunter's Orchestration Brain, an expert smart contract security auditor and bug bounty hunter.
+        return f"""You are VulnHunter's Orchestration Brain, an expert smart contract security auditor and bug bounty hunter.
 
 Your job is to analyze the target codebase and make intelligent decisions about which security scanners to run.
 

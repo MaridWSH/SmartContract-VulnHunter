@@ -1,4 +1,4 @@
-"""End-to-end test for SmartContract VulnHunter framework."""
+"""End-to-end test for VulnHunter framework."""
 
 import asyncio
 import tempfile
@@ -12,7 +12,7 @@ from vulnhunter.adapters.mock_scanner_adapter import MockScannerAdapter
 
 def test_end_to_end():
     """Test complete framework flow with mock scanner."""
-    print("🧪 Testing SmartContract VulnHunter Framework...")
+    print("🧪 Testing VulnHunter Framework...")
 
     # Create a mock project
     with tempfile.TemporaryDirectory() as tmpdir:

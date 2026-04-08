@@ -1,4 +1,4 @@
-"""Status command - Show SmartContract VulnHunter status and system info."""
+"""Status command - Show VulnHunter status and system info."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from vulnhunter.knowledge import load_knowledge_base, Language
 
 app = typer.Typer(
     name="status",
-    help="📊 Show SmartContract VulnHunter status and system information",
+    help="📊 Show VulnHunter status and system information",
     rich_markup_mode="rich",
 )
 console = Console()
@@ -25,8 +25,8 @@ console = Console()
 def show_status(
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Show verbose output"),
 ):
-    """Show SmartContract VulnHunter system status."""
-    console.print("[bold blue]📊 SmartContract VulnHunter Status[/bold blue]")
+    """Show VulnHunter system status."""
+    console.print("[bold blue]📊 VulnHunter Status[/bold blue]")
     console.print()
 
     # Knowledge Base Status

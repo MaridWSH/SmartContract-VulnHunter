@@ -21,7 +21,6 @@ from vulnhunter.models import (
 _Slither = None  # type: ignore
 _DetectorAll = None  # type: ignore
 _AbstractDetector = None  # type: ignore
-_InvalidCompilation = None  # type: ignore
 _SlitherException = None  # type: ignore
 _SlitherError = None  # type: ignore
 
@@ -31,13 +30,11 @@ try:
     from slither.detectors.abstract_detector import AbstractDetector  # type: ignore
 
     # Common exception names in Slither
-    from slither.core.exceptions import SlitherException, SlitherError  # type: ignore
-    from slither.exceptions import InvalidCompilation  # type: ignore
+    from slither.exceptions import SlitherException, SlitherError  # type: ignore
 
     _Slither = Slither
     _DetectorAll = all_detectors
     _AbstractDetector = AbstractDetector
-    _InvalidCompilation = InvalidCompilation
     _SlitherException = SlitherException
     _SlitherError = SlitherError
 except Exception:  # pragma: no cover - optional dependency
@@ -45,7 +42,6 @@ except Exception:  # pragma: no cover - optional dependency
     _Slither = None  # type: ignore
     _DetectorAll = None  # type: ignore
     _AbstractDetector = None  # type: ignore
-    _InvalidCompilation = None  # type: ignore
     _SlitherException = None  # type: ignore
     _SlitherError = None  # type: ignore
 
@@ -67,9 +63,7 @@ class SlitherAdapter(ToolAdapter):
         findings: List[Finding] = []
 
         if _Slither is None:
-            logger.warning(
-                "Slither Python library not available; skipping adapter run."
-            )
+            logger.warning("Slither Python library not available; skipping adapter run.")
             return findings
 
         try:
@@ -79,8 +73,27 @@ class SlitherAdapter(ToolAdapter):
             return findings
 
         try:
+            # Register all available detectors
+            if _DetectorAll is not None and _AbstractDetector is not None:
+                for detector_name in dir(_DetectorAll):
+                    detector_cls = getattr(_DetectorAll, detector_name)
+                    if (
+                        isinstance(detector_cls, type)
+                        and issubclass(detector_cls, _AbstractDetector)
+                        and detector_cls != _AbstractDetector
+                    ):
+                        slither.register_detector(detector_cls)
+
             # Run all built-in detectors; use the public run_detectors() API
             results = slither.run_detectors()  # type: ignore
+            # Flatten results (run_detectors returns list of lists)
+            flat_results = []
+            for r in results:
+                if isinstance(r, list):
+                    flat_results.extend(r)
+                elif r is not None:
+                    flat_results.append(r)
+            results = flat_results
         except Exception as exc:
             # Gracefully handle compilation/runtime issues
             logger.error(f"Slither run_detectors() failed for {target}: {exc}")
@@ -174,12 +187,7 @@ def _convert_result(res: object, target: str) -> Optional[Finding]:
         or data.get("id")
         or "slither.detector"
     )
-    description = (
-        data.get("description")
-        or data.get("message")
-        or data.get("detail")
-        or str(data)
-    )
+    description = data.get("description") or data.get("message") or data.get("detail") or str(data)
     impact = data.get("impact") or data.get("severity") or data.get("score")
     confidence = data.get("confidence") or data.get("confidence_level") or None
 

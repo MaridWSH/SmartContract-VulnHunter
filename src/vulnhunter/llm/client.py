@@ -57,12 +57,26 @@ class KimiClient:
 
                 resp = await asyncio.to_thread(_call)
                 message = resp.choices[0].message
-                # If the API returns a function_call, treat it as an error here; the
-                # caller should use analyze_with_tools for orchestration.
-                if isinstance(message, dict) and "content" in message:
-                    return message["content"].strip()
-                # Fallback to raw content if the structure differs
-                return getattr(message, "content", "").strip()
+
+                # Extract content - check various possible locations
+                content = None
+
+                # Try standard content field first
+                if isinstance(message, dict):
+                    content = message.get("content")
+                else:
+                    content = getattr(message, "content", None)
+
+                # If no content, try reasoning field (some models return reasoning)
+                if not content and hasattr(message, "reasoning"):
+                    content = message.reasoning
+
+                # If still no content, try to get any text representation
+                if not content and hasattr(message, "model_dump"):
+                    msg_dict = message.model_dump()
+                    content = msg_dict.get("content") or msg_dict.get("reasoning")
+
+                return content.strip() if content else ""
             except Exception as e:
                 error_msg = str(e)
                 if "rate_limit" in error_msg.lower() or "429" in error_msg:

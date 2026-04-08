@@ -1,4 +1,4 @@
-"""Reconnaissance report models for SmartContract VulnHunter."""
+"""Reconnaissance report models for VulnHunter."""
 
 from __future__ import annotations
 

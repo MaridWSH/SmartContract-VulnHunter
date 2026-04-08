@@ -1,4 +1,4 @@
-"""Recon module for SmartContract VulnHunter."""
+"""Recon module for VulnHunter."""
 
 from vulnhunter.recon.engine import ReconEngine
 from vulnhunter.recon.models.recon_report import (

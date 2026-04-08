@@ -1,4 +1,4 @@
-"""SmartContract VulnHunter commands package."""
+"""VulnHunter commands package."""
 
 from vulnhunter.commands import (
     scan,

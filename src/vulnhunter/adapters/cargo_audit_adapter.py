@@ -6,7 +6,7 @@ import shutil
 from typing import List
 
 from .base import ToolAdapter
-from vulnhunter.findings import Finding
+from vulnhunter.models.finding import Finding
 
 
 class CargoAuditAdapter(ToolAdapter):
@@ -72,9 +72,7 @@ class CargoAuditAdapter(ToolAdapter):
         if isinstance(data, dict):
             # cargo-audit v0.12+ often uses data["vulnerabilities"]["list"]
             vuln_container = data.get("vulnerabilities") or {}
-            vulnerabilities = (
-                vuln_container.get("list") if isinstance(vuln_container, dict) else []
-            )
+            vulnerabilities = vuln_container.get("list") if isinstance(vuln_container, dict) else []
 
         if not vulnerabilities and isinstance(data, dict):
             # older formats may store advisories under top-level keys
@@ -92,12 +90,8 @@ class CargoAuditAdapter(ToolAdapter):
                 continue
             pkg = item.get("package_name") or item.get("package")
             ver = item.get("affected_version") or item.get("package_version")
-            title = (
-                item.get("title") or item.get("summary") or (f"Vulnerability in {pkg}")
-            )
-            description = (
-                item.get("description") or item.get("details") or "No description"
-            )
+            title = item.get("title") or item.get("summary") or (f"Vulnerability in {pkg}")
+            description = item.get("description") or item.get("details") or "No description"
             sev = item.get("severity") or item.get("cvssV3", {}).get("score")
             loc = f"{pkg}@{ver}" if pkg else target
             findings.append(

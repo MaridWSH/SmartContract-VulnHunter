@@ -1,4 +1,4 @@
-"""Git repository cloning functionality for SmartContract VulnHunter."""
+"""Git repository cloning functionality for VulnHunter."""
 
 from __future__ import annotations
 

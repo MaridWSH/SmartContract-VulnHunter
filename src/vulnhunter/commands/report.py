@@ -1,4 +1,4 @@
-"""Report command for SmartContract VulnHunter."""
+"""Report command for VulnHunter."""
 
 from __future__ import annotations
 

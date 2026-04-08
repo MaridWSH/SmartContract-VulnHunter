@@ -1,4 +1,4 @@
-"""Bounty command for SmartContract VulnHunter."""
+"""Bounty command for VulnHunter."""
 
 from __future__ import annotations
 

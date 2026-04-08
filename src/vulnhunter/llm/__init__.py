@@ -1,4 +1,4 @@
-"""LLM module for SmartContract VulnHunter."""
+"""LLM module for VulnHunter."""
 
 from __future__ import annotations
 

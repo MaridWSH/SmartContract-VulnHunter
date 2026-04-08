@@ -1,4 +1,4 @@
-"""SmartContract VulnHunter - Main entry point."""
+"""VulnHunter CLI - Main entry point."""
 
 from __future__ import annotations
 
@@ -16,8 +16,12 @@ from vulnhunter.commands import (
     poc,
     hunt,
     audit,
+    status,
+    monitor,
 )
 from vulnhunter.config import get_config
+
+__version__ = "0.1.0"
 
 app = typer.Typer(
     name="vulnhunter",
@@ -39,14 +43,25 @@ app.add_typer(audit.app, name="audit", help="🔬 Interactive end-to-end audit w
 app.add_typer(report.app, name="report", help="📊 Generate platform-specific reports")
 app.add_typer(config.app, name="config", help="⚙️  Manage configuration")
 app.add_typer(bounty.app, name="bounty", help="💰 Prepare bounty submissions")
+app.add_typer(status.app, name="status", help="📊 Show system status")
+app.add_typer(monitor.app, name="monitor", help="🏹 Vaulthunter 24/7 monitoring")
+
+
+def version_callback(value: bool) -> None:
+    if value:
+        console.print(f"vulnhunter version {__version__}")
+        raise typer.Exit()
 
 
 @app.callback()
 def main(
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Enable verbose output"),
     config_path: str = typer.Option(None, "--config", "-c", help="Path to config file"),
+    version: bool = typer.Option(
+        None, "--version", callback=version_callback, is_eager=True, help="Show version and exit"
+    ),
 ) -> None:
-    """SmartContract VulnHunter - Smart contract security framework for bug bounty researchers.
+    """VulnHunter - Smart contract security framework for bug bounty researchers.
 
     Orchestrates 15+ security scanners, LLM analysis, PoC generation, and
     platform-specific reporting across Solidity, Rust/Solana, Vyper, and Cairo.

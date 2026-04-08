@@ -1,4 +1,4 @@
-"""Mythril adapter for SmartContract VulnHunter - symbolic execution with aggressive timeouts."""
+"""Mythril adapter for VulnHunter - symbolic execution with aggressive timeouts."""
 
 from __future__ import annotations
 

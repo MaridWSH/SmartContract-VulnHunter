@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import List
 
-from vulnhunter.core.task import Finding
+from vulnhunter.findings import Finding
 
 
 class ToolAdapter(ABC):

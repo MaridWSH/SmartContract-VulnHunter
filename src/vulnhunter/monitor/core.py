@@ -1,7 +1,7 @@
 """Vaulthunter 24/7 Continuous Monitoring System.
 
 Monitors blockchain for new contracts, upgrades, and suspicious activity.
-Integrates with SmartContract VulnHunter for automated scanning.
+Integrates with VulnHunter for automated scanning.
 """
 
 from __future__ import annotations

@@ -126,7 +126,7 @@ def install(
     console.print(f"[dim]Command: {info['install']}[/dim]")
     console.print()
     console.print("[yellow]Note: Run the command above in your terminal to install.[/yellow]")
-    console.print("[dim]SmartContract VulnHunter doesn't auto-install to avoid permission issues.[/dim]")
+    console.print("[dim]VulnHunter doesn't auto-install to avoid permission issues.[/dim]")
 
 
 @app.command()

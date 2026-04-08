@@ -1,4 +1,4 @@
-"""Semgrep adapter for SmartContract VulnHunter - pattern matching with SARIF output."""
+"""Semgrep adapter for VulnHunter - pattern matching with SARIF output."""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ except Exception:
 
 
 class SemgrepAdapter(ToolAdapter):
-    """Semgrep adapter producing SARIF output and translating to SmartContract VulnHunter Findings."""
+    """Semgrep adapter producing SARIF output and translating to VulnHunter Findings."""
 
     @property
     def name(self) -> str:

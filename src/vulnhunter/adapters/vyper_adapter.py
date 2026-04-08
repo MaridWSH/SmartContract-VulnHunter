@@ -1,4 +1,4 @@
-"""Vyper adapter for SmartContract VulnHunter - leverages Slither's native Vyper support."""
+"""Vyper adapter for VulnHunter - leverages Slither's native Vyper support."""
 
 from __future__ import annotations
 
