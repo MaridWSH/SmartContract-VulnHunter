@@ -8,7 +8,7 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability within SmartContract VulnHunter, please send an email to security@vulnhunter.dev. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within SmartContract VulnHunter, please send an email to info@vulnhunter.sh. All security vulnerabilities will be promptly addressed.
 
 Please include the following details in your report:
 - Type of vulnerability
