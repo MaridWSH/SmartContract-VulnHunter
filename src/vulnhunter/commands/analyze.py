@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 from pathlib import Path
 from typing import Optional
@@ -66,7 +67,7 @@ def deep(
 
     # Get scan plan from orchestrator
     console.print("\n[cyan]Getting orchestrator decision...[/cyan]")
-    decision = brain.decide_scan_plan(recon_report)
+    decision = asyncio.run(brain.decide_scan_plan(recon_report))
 
     # Display decision
     console.print(
@@ -197,7 +198,7 @@ def plan(
 
     # Get plan from orchestrator
     brain = OrchestratorBrain()
-    decision = brain.decide_scan_plan(recon_report)
+    decision = asyncio.run(brain.decide_scan_plan(recon_report))
 
     # Display plan
     console.print("\n[bold]Scan Plan:[/bold]")

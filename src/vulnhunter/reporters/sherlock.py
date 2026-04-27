@@ -22,7 +22,8 @@ class SherlockReporter(BaseReporter):
             fid = getattr(f, "id", idx)
             title = getattr(f, "title", f"Finding {fid}")
             description = getattr(f, "description", "")
-            impact = getattr(f, "impact", None)
+            # Use direct attribute access where available
+            impact = f.impact if hasattr(f, "impact") else None
             # Sherlock uses impact-based severity (no likelihood)
             sev = "Low"
             matrix_score = None
@@ -36,7 +37,7 @@ class SherlockReporter(BaseReporter):
                     sev = "High"
             # Optional PoC per finding
             poc = getattr(f, "poc", None)
-            likelihood = getattr(f, "likelihood", None)
+            likelihood = f.likelihood if hasattr(f, "likelihood") else None
             if isinstance(impact, (int, float)) and isinstance(
                 likelihood, (int, float)
             ):

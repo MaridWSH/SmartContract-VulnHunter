@@ -24,8 +24,8 @@ class Code4renaReporter(BaseReporter):
             description = getattr(f, "description", "")
             sev_raw = getattr(f, "severity", "Medium")
             poc = getattr(f, "poc", None)
-            impact = getattr(f, "impact", None)
-            likelihood = getattr(f, "likelihood", None)
+            impact = f.impact if hasattr(f, "impact") else None
+            likelihood = f.likelihood if hasattr(f, "likelihood") else None
             funds = getattr(f, "funds_at_risk", None)
 
             # Normalize to Code4rena-friendly severities: High/Medium for main findings, Low for lows

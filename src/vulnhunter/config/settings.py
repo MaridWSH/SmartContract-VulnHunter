@@ -51,6 +51,26 @@ class LLMConfig(BaseModel):
     api_key: str = ""
     model: str = "moonshotai/kimi-k2.5"
     base_url: str = ""
+    max_cost_per_run: float = 5.0
+
+
+class ClaudeConfig(BaseModel):
+    api_key: str = ""
+    sonnet_model: str = "claude-sonnet-4-6-20251001"
+    opus_model: str = "claude-opus-4-7"
+
+
+class OpenAIConfig(BaseModel):
+    api_key: str = ""
+    model: str = "gpt-4o"
+
+
+class RoutingConfig(BaseModel):
+    recon: str = "kimi"
+    scan: str = "claude_sonnet"
+    adversarial: str = "claude_opus"
+    synthesis: str = "openai"
+    poc: str = "claude_sonnet"
 
 
 class AppConfig(BaseSettingsType):
@@ -58,6 +78,9 @@ class AppConfig(BaseSettingsType):
     scan: ScanConfig = Field(default_factory=ScanConfig)
     report: ReportConfig = Field(default_factory=ReportConfig)
     llm: LLMConfig = Field(default_factory=LLMConfig)
+    claude: ClaudeConfig = Field(default_factory=ClaudeConfig)
+    openai: OpenAIConfig = Field(default_factory=OpenAIConfig)
+    routing: RoutingConfig = Field(default_factory=RoutingConfig)
 
     class Config:
         env_prefix = "VULNHUNTER_"

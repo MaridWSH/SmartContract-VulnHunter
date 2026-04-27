@@ -65,6 +65,12 @@ class Finding(BaseModel):
     fingerprint: Optional[str] = Field(
         None, description="Deterministic fingerprint for deduplication."
     )
+    impact: Optional[int] = Field(
+        None, ge=1, le=5, description="Impact score (1-5)."
+    )
+    likelihood: Optional[int] = Field(
+        None, ge=1, le=5, description="Likelihood score (1-5)."
+    )
     metadata: Dict[str, Any] = Field(
         default_factory=dict, description="Arbitrary extra data about the finding."
     )

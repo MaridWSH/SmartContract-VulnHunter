@@ -47,7 +47,15 @@ def generate(
 
     # Load files
     recon_report = ReconReport.model_validate_json(recon_file.read_text())
-    finding = json.loads(finding_file.read_text())
+    finding_data = json.loads(finding_file.read_text())
+
+    if isinstance(finding_data, list):
+        if not finding_data:
+            console.print("[yellow]⚠️  No findings in file[/yellow]")
+            raise typer.Exit(1)
+        finding = finding_data[0]
+    else:
+        finding = finding_data
 
     # Initialize orchestrator
     brain = OrchestratorBrain()

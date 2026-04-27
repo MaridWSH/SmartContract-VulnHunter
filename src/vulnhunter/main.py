@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import importlib.metadata
 import typer
 from rich.console import Console
 
@@ -18,10 +19,13 @@ from vulnhunter.commands import (
     audit,
     status,
     monitor,
+    kb,
+    benchmark,
+    contest,
 )
 from vulnhunter.config import get_config
 
-__version__ = "0.1.0"
+__version__ = "0.3.0"
 
 app = typer.Typer(
     name="vulnhunter",
@@ -32,7 +36,6 @@ app = typer.Typer(
 
 console = Console()
 
-# Add subcommands
 app.add_typer(scan.app, name="scan", help="🔍 Scan targets for vulnerabilities")
 app.add_typer(clone.app, name="clone", help="📥 Clone repositories for analysis")
 app.add_typer(recon.app, name="recon", help="🗺️  Reconnaissance and target analysis")
@@ -45,6 +48,9 @@ app.add_typer(config.app, name="config", help="⚙️  Manage configuration")
 app.add_typer(bounty.app, name="bounty", help="💰 Prepare bounty submissions")
 app.add_typer(status.app, name="status", help="📊 Show system status")
 app.add_typer(monitor.app, name="monitor", help="🏹 Vaulthunter 24/7 monitoring")
+app.add_typer(kb.app, name="kb", help="📚 Knowledge base management")
+app.add_typer(benchmark.app, name="benchmark", help="📊 Run benchmarks")
+app.add_typer(contest.app, name="contest", help="🏆 Contest participation pipeline")
 
 
 def version_callback(value: bool) -> None:
@@ -68,9 +74,6 @@ def main(
     """
     if verbose:
         console.print("[dim]Verbose mode enabled[/dim]")
-    if config_path:
-        # Config will be loaded from specified path
-        pass
 
 
 if __name__ == "__main__":

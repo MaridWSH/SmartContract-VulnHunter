@@ -1,0 +1,7 @@
+{
+  "vdr_regression_pp": 3.0,
+  "oi_regression": 0.01,
+  "class_regression_pp": 10.0,
+  "min_vdr": 80.0,
+  "max_oi": 0.03
+}

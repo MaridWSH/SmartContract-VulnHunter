@@ -17,10 +17,13 @@ from vulnhunter.core.deduplicator import Deduplicator
 from vulnhunter.core.task import Task, TaskStatus
 from vulnhunter.config import get_config
 from vulnhunter.adapters.slither_adapter import SlitherAdapter
+from vulnhunter.adapters.smtchecker_adapter import SMTCheckerAdapter
 from vulnhunter.adapters.aderyn_adapter import AderynAdapter
 from vulnhunter.adapters.semgrep_adapter import SemgrepAdapter
 from vulnhunter.adapters.solhint_adapter import SolhintAdapter
 from vulnhunter.adapters.mythril_adapter import MythrilAdapter
+from vulnhunter.adapters.halmos_adapter import HalmosAdapter
+from vulnhunter.adapters.ityfuzz_adapter import ItyFuzzAdapter
 
 app = typer.Typer(help="🔍 Scan targets for vulnerabilities")
 console = Console()
@@ -34,6 +37,9 @@ def get_available_adapters(target: str, tools: Optional[List[str]] = None) -> Li
         ("semgrep", SemgrepAdapter()),
         ("solhint", SolhintAdapter()),
         ("mythril", MythrilAdapter()),
+        ("smtchecker", SMTCheckerAdapter()),
+        ("halmos", HalmosAdapter()),
+        ("ityfuzz", ItyFuzzAdapter()),
     ]
 
     available = []

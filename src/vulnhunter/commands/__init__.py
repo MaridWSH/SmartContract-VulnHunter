@@ -11,6 +11,11 @@ from vulnhunter.commands import (
     poc,
     hunt,
     audit,
+    status,
+    monitor,
+    kb,
+    benchmark,
+    contest,
 )
 
 __all__ = [
@@ -24,4 +29,9 @@ __all__ = [
     "poc",
     "hunt",
     "audit",
+    "status",
+    "monitor",
+    "kb",
+    "benchmark",
+    "contest",
 ]

@@ -50,8 +50,10 @@ def generate(
         )
         raise typer.Exit(1)
 
-    # Load findings
-    findings_file = input_dir / "findings.json"
+    if input_dir.is_file():
+        findings_file = input_dir
+    else:
+        findings_file = input_dir / "findings.json"
     if not findings_file.exists():
         console.print(f"[bold red]✗ Findings file not found: {findings_file}[/bold red]")
         raise typer.Exit(1)

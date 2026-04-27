@@ -15,6 +15,6 @@ format = "sarif"
 output_dir = "./reports"
 
 [vulnhunter.llm]
-api_key = "[ENCRYPTION_KEY]"
-model = "moonshotai/kimi-k2.5"
-base_url = "https://openrouter.ai/api/v1"
+api_key = "Enter API KEY"
+model = "kimi-k2.5"
+base_url = "https://api.kimi.com/coding"

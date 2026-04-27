@@ -60,4 +60,6 @@ Thumbs.db
 /tmp/
 *.tmp
 landing/*
+*.md
+
 

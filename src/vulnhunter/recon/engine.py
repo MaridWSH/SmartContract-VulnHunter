@@ -27,7 +27,7 @@ class ReconEngine:
     """Orchestrates 10-phase reconnaissance on a target codebase."""
 
     def __init__(self, target_path: str, repo_url: Optional[str] = None):
-        self.target_path = Path(target_path)
+        self.target_path = Path(target_path).resolve()
         self.repo_url = repo_url or self._detect_repo_url()
         self.report = ReconReport(
             repo_url=self.repo_url or str(self.target_path),
@@ -258,10 +258,41 @@ class ReconEngine:
         console.print("[blue]Phase 3: Codebase Mapping[/blue]")
 
         # Count files by type
-        solidity_files = list(self.target_path.glob("**/*.sol"))
-        rust_files = list(self.target_path.glob("**/*.rs"))
-        vyper_files = list(self.target_path.glob("**/*.vy"))
-        cairo_files = list(self.target_path.glob("**/*.cairo"))
+        # Handle both directories and single files
+        if self.target_path.is_file():
+            # Single file mode
+            suffix = self.target_path.suffix
+            if suffix == ".sol":
+                solidity_files = [self.target_path]
+                rust_files = []
+                vyper_files = []
+                cairo_files = []
+            elif suffix == ".rs":
+                solidity_files = []
+                rust_files = [self.target_path]
+                vyper_files = []
+                cairo_files = []
+            elif suffix == ".vy":
+                solidity_files = []
+                rust_files = []
+                vyper_files = [self.target_path]
+                cairo_files = []
+            elif suffix == ".cairo":
+                solidity_files = []
+                rust_files = []
+                vyper_files = []
+                cairo_files = [self.target_path]
+            else:
+                solidity_files = []
+                rust_files = []
+                vyper_files = []
+                cairo_files = []
+        else:
+            # Directory mode
+            solidity_files = list(self.target_path.glob("**/*.sol"))
+            rust_files = list(self.target_path.glob("**/*.rs"))
+            vyper_files = list(self.target_path.glob("**/*.vy"))
+            cairo_files = list(self.target_path.glob("**/*.cairo"))
 
         # Try to get LOC
         total_loc = 0

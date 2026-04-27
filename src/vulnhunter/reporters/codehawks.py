@@ -22,29 +22,28 @@ class CodehawksReporter(BaseReporter):
             fid = getattr(f, "id", idx)
             title = getattr(f, "title", f"Finding {fid}")
             description = getattr(f, "description", "")
-            impact = getattr(f, "impact", 1)
-            likelihood = getattr(f, "likelihood", 1)
+            # Use explicit fields if present; fall back to None for missing
+            impact = getattr(f, "impact", None)
+            likelihood = getattr(f, "likelihood", None)
             poc = getattr(f, "poc", None)
 
-            # Compute matrix score: impact × likelihood. Map to standard severity bands.
-            if isinstance(impact, (int, float)) and isinstance(
-                likelihood, (int, float)
-            ):
+            # Compute matrix score if both values are present and numeric
+            matrix_score = None
+            if isinstance(impact, (int, float)) and isinstance(likelihood, (int, float)):
                 matrix_score = int(impact * likelihood)
-            else:
-                matrix_score = None
 
-            # Severity from matrix score: 10+ Critical, 7-9 High, 4-6 Medium, <=3 Low
-            if matrix_score is None:
-                severity = "Low"
-            elif matrix_score >= 10:
-                severity = "Critical"
-            elif matrix_score >= 7:
-                severity = "High"
-            elif matrix_score >= 4:
-                severity = "Medium"
+            # Derive severity from matrix score if available; otherwise fall back to raw severity
+            if matrix_score is not None:
+                if matrix_score >= 10:
+                    severity = "Critical"
+                elif matrix_score >= 7:
+                    severity = "High"
+                elif matrix_score >= 4:
+                    severity = "Medium"
+                else:
+                    severity = "Low"
             else:
-                severity = "Low"
+                severity = getattr(f, "severity", "Low")
 
             normalized.append(
                 {

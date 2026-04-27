@@ -11,10 +11,21 @@ from __future__ import annotations
 
 import json
 import hashlib
-from typing import Any, Dict
+from typing import Any, Dict, Optional
+
+from vulnhunter.recon.models.recon_report import ReconReport
 
 
 MAX_CONTEXT_CHARS = 256 * 1024  # 256 KB window
+
+VERIFICATION_DIRECTIVE = """\
+---
+VERIFICATION DIRECTIVE:
+- Double-check every claim against the code before asserting it.
+- State uncertainty explicitly; do not fabricate line numbers, function names, or values.
+- If you cannot verify a claim from the code provided, say so and abstain.
+- Prioritize accuracy over speed or completeness.
+"""
 
 
 def trim_context(text: str, max_chars: int = MAX_CONTEXT_CHARS) -> str:
@@ -36,6 +47,41 @@ def _hash_string(s: str) -> str:
 def context_key(code: str, pass_number: int) -> str:
     h = _hash_string(code)
     return f"ctx:{pass_number}:{h}"
+
+
+def build_recon_summary(recon: Optional[ReconReport]) -> str:
+    """Build a ≤1KB recon summary block for injection into pass prompts."""
+    if recon is None:
+        return ""
+
+    lines = ["# Protocol Context"]
+    lines.append(f"- Type: {recon.protocol_type or 'unknown'}")
+    lines.append(f"- Ecosystems: {', '.join(recon.ecosystems) if recon.ecosystems else 'unknown'}")
+
+    # Top 5 hot zones
+    hot = recon.hot_zones[:5]
+    if hot:
+        lines.append("- Hot zones:")
+        for zone in hot:
+            lines.append(f"  - {zone.file_path}: {zone.reason}")
+    else:
+        lines.append("- Hot zones: none identified")
+
+    # Attack surface counts
+    attack_surface = (
+        f"external_calls={recon.external_call_sites}, "
+        f"payable={recon.payable_functions}, "
+        f"oracle_deps={recon.oracle_dependencies}, "
+        f"assembly={recon.assembly_blocks}"
+    )
+    lines.append(f"- Attack surface: {attack_surface}")
+    lines.append(f"- Build status: {recon.build_status}")
+
+    summary = "\n".join(lines)
+    # Hard cap at 1KB
+    if len(summary) > 1024:
+        summary = summary[:1021] + "..."
+    return summary
 
 
 def build_pass_prompt(pass_number: int, context: Dict[str, Any]) -> str:
@@ -72,11 +118,25 @@ def build_pass_prompt(pass_number: int, context: Dict[str, Any]) -> str:
         ),
     }
     base = prompts.get(pass_number, prompts[1])
+
+    parts: list[str] = [base]
+
+    # Inject recon summary before code context
+    recon = context.get("recon")
+    if recon is not None:
+        recon_summary = build_recon_summary(recon)
+        if recon_summary:
+            parts.append("\n\n" + recon_summary)
+
     # Context can be appended to the prompt to aid grounding, but keep under token limits
     if context:
-        grounding = f"\n\nContext:\n{context.get('code', '')}\nFindings so far: {len(context.get('findings', []))}"  # lightweight grounding
-        return base + grounding
-    return base
+        code = context.get("code", "")
+        findings_count = len(context.get("findings", []))
+        grounding = f"\n\nContext:\n{code}\nFindings so far: {findings_count}"
+        parts.append(grounding)
+
+    parts.append("\n\n" + VERIFICATION_DIRECTIVE)
+    return "".join(parts)
 
 
 def parse_json_safely(text: str) -> Any:

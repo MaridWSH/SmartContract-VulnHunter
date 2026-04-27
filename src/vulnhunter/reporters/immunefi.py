@@ -27,8 +27,9 @@ class ImmunefiReporter(BaseReporter):
             funds = getattr(f, "funds_at_risk", None)
             raw_sev = getattr(f, "severity", "Info")
             poc = getattr(f, "poc", None) or None
-            impact = getattr(f, "impact", None)  # optional numeric
-            likelihood = getattr(f, "likelihood", None)  # optional numeric
+            # Prefer direct attribute access for impact/likelihood when available
+            impact = f.impact if hasattr(f, "impact") else None
+            likelihood = f.likelihood if hasattr(f, "likelihood") else None
             matrix_score = None
             if isinstance(impact, (int, float)) and isinstance(
                 likelihood, (int, float)
